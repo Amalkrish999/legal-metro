@@ -1,0 +1,12 @@
+[
+  { "ruleId": "R1", "name": "Manufacturer name declared", "field": "manufacturerName", "validation": "nonEmpty" },
+  { "ruleId": "R2", "name": "Manufacturer address declared", "field": "manufacturerAddress", "validation": "nonEmpty" },
+  { "ruleId": "R3", "name": "Common/generic name of commodity declared", "field": "commodityName", "validation": "nonEmpty" },
+  { "ruleId": "R4", "name": "Net quantity declared", "field": "netQuantity", "validation": "nonEmpty" },
+  { "ruleId": "R5", "name": "MRP declared in valid currency format", "field": "mrp", "validation": "isCurrencyFormat" },
+  { "ruleId": "R6", "name": "Month/year of manufacture declared", "field": "mfgDate", "validation": "isValidDate" },
+  { "ruleId": "R7", "name": "Consumer care details declared", "field": "consumerCareDetails", "validation": "nonEmpty" },
+  { "ruleId": "R8", "name": "Country of origin declared", "field": "countryOfOrigin", "validation": "nonEmpty" },
+  { "ruleId": "R9", "name": "Minimum font size compliance", "field": "fontSizeMm", "validation": "minValue", "minValue": 1 },
+  { "ruleId": "R10", "name": "MRP not missing or zero", "field": "mrp", "validation": "greaterThanZero" }
+]
