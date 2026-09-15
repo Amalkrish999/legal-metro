@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useId } from 'react';
 import { UploadCloud, Camera, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -12,6 +12,7 @@ export function UploadBox({ onFilesSelected, className }: UploadBoxProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
+  const uniqueId = useId();
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -66,6 +67,7 @@ export function UploadBox({ onFilesSelected, className }: UploadBoxProps) {
       onClick={() => !preview && fileInputRef.current?.click()}
     >
       <input 
+        id={`file-${uniqueId}`}
         type="file" 
         className="hidden" 
         ref={fileInputRef}
@@ -74,6 +76,7 @@ export function UploadBox({ onFilesSelected, className }: UploadBoxProps) {
         multiple
       />
       <input 
+        id={`camera-${uniqueId}`}
         type="file" 
         className="hidden" 
         ref={cameraInputRef}
@@ -103,19 +106,21 @@ export function UploadBox({ onFilesSelected, className }: UploadBoxProps) {
           </p>
           
           <div className="flex items-center gap-4 relative z-20">
-            <button 
-              onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-              className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-lg text-sm font-medium shadow-sm text-slate-700 dark:text-slate-200 pointer-events-auto hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors"
+            <label 
+              htmlFor={`file-${uniqueId}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-lg text-sm font-medium shadow-sm text-slate-700 dark:text-slate-200 pointer-events-auto hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors cursor-pointer"
             >
               Browse Files
-            </button>
-            <button 
-              onClick={(e) => { e.stopPropagation(); cameraInputRef.current?.click(); }}
-              className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium shadow-sm pointer-events-auto hover:bg-primary-dark transition-colors"
+            </label>
+            <label 
+              htmlFor={`camera-${uniqueId}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium shadow-sm pointer-events-auto hover:bg-primary-dark transition-colors cursor-pointer"
             >
               <Camera className="w-4 h-4" />
               Open Camera
-            </button>
+            </label>
           </div>
         </>
       )}
